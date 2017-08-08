@@ -23,5 +23,6 @@ public class SignUpFragment extends Fragment {
 
 
 
+
     }
 }//Main Class
