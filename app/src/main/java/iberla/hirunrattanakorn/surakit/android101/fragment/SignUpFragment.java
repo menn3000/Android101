@@ -22,5 +22,6 @@ public class SignUpFragment extends Fragment {
         return view;
 
 
+
     }
 }//Main Class
