@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Android101</string>
+    <string name="app_name">App Menn</string>
+    <string name="user">User :</string>
+    <string name="pass">Pass :</string>
 </resources>
