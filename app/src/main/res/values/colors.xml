@@ -5,4 +5,5 @@
     <color name="textColorPrimary">#ffffff</color>
     <color name="colorPrimaryLight">#c3fdff</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bgWhite">#85ffffff</color>
 </resources>
