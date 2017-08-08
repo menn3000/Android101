@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     tools:context="iberla.hirunrattanakorn.surakit.android101.MainActivity">
 
+    <!--Image BG-->
+    <ImageView
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg001"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <!--Content of Fragment-->
     <LinearLayout
-        android:id="@+id/myContent"
+       android:id="@+id/myContent"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
-
+        android:layout_height="match_parent">
+    </LinearLayout>
 
 </RelativeLayout>
-

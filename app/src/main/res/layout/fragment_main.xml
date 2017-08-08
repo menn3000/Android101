@@ -4,9 +4,10 @@
 
     <!--Content-->
     <LinearLayout
+        android:background="#85ffffff"
         android:padding="@dimen/padding"
-        android:layout_marginRight="@dimen/margin"
         android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -19,74 +20,71 @@
             android:layout_width="@dimen/logo"
             android:layout_height="@dimen/logo" />
 
-
         <!--User-->
         <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:src="@mipmap/ic_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@mipmap/ic_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:inputType="text"
-                android:textColorHint="@color/colorPrimaryDark"
-
-
-                android:hint="@string/user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+    <EditText
+        android:inputType="text"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryLight"
+        android:hint="@string/user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
-        </LinearLayout>
 
+</LinearLayout>
 
-        <!--Pass-->
+        <!--Password-->
         <LinearLayout
-
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <ImageView
-                android:src="@mipmap/ic_pass"
+                android:src="@mipmap/ic_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <EditText
                 android:inputType="text"
-                android:textColorHint="@color/colorPrimaryDark"
-
-
-                android:hint="@string/pass"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryLight"
+                android:hint="@string/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
 
+
         </LinearLayout>
 
-
-        <!--NEW Rehister-->
-<TextView
-    android:clickable="true"
-    android:textColor="@color/colorAccent"
-    android:text="New Rehister"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-
+        <!--New Register-->
+        <TextView
+            android:clickable="true"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="@dimen/h2"
+            android:text="New Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
 <!--Button-->
-<Button
-    android:background="@color/colorPrimaryDark"
-    android:text="Sing In"
-    android:layout_alignParentBottom="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    <Button
+        android:textStyle="bold"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/colorPrimaryDark"
+        android:text="Sign In"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>
