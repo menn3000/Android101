@@ -2,6 +2,7 @@ package iberla.hirunrattanakorn.surakit.android101.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,9 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import iberla.hirunrattanakorn.surakit.android101.Manager.MyAlert;
+import iberla.hirunrattanakorn.surakit.android101.Manager.PostNewUserToServer;
 import iberla.hirunrattanakorn.surakit.android101.R;
+import iberla.hirunrattanakorn.surakit.android101.database.ManageDatabase;
+import iberla.hirunrattanakorn.surakit.android101.database.MyOpenHelper;
 
 /**
  * Created by Menn on 8/8/2560.
@@ -32,6 +37,7 @@ public class SignUpFragment extends Fragment {
     private String tag = "10augV1";
     private Uri uri;
     private boolean aBoolean = true;
+    private ManageDatabase manageDatabase;
 
 
     @Nullable
@@ -61,8 +67,65 @@ public class SignUpFragment extends Fragment {
         //Picture Controller
         pictureController();
 
+        //Creat and connected Database
+        createAndConnectedDatabase();
+
+        //Upload Controlle
+        uploadControlle();
+
 
     } //onActivityCreated
+
+    private void uploadControlle() {
+        uploadImageView = getView().findViewById(R.id.imvUpload);
+        uploadImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //CheckDatabase and Upload to Server
+                try {
+                    //Connected Dabase
+                    SQLiteDatabase sqLiteDatabase = getActivity().openOrCreateDatabase(MyOpenHelper.database_name, getActivity().MODE_PRIVATE, null);
+                    Cursor cursor = sqLiteDatabase.rawQuery("Select * from userTABLE", null);
+                    cursor.moveToFirst();
+                    int intCursor = cursor.getCount();
+                    Log.d(tag, "intCursor ==> " + intCursor);
+
+                    //Check Empty Table
+                    if (intCursor == 0) {
+                        MyAlert myAlert = new MyAlert(getActivity());
+                        myAlert.myDialog("Title", "No Data in DB");
+
+                    } else {
+                        //Upload Status
+                        PostNewUserToServer postNewUserToServer = new PostNewUserToServer(getActivity());
+                        String strURL = "http://swiftcodingthai.com/menn/addData.php";
+
+                        for (int i=0; i<intCursor; i+= 1) {
+                            String strName = cursor.getString(1);
+                            String strUser = cursor.getString(2);
+                            String strPassword = cursor.getString(3);
+                            String strPathPicture = cursor.getString(4);
+                            Log.d(tag, "strName[" + i + "] ==> " + strName);
+                            postNewUserToServer.execute(strName,strPassword,strPathPicture,strURL);
+                            postNewUserToServer.cancel(true);
+                            cursor.moveToNext();
+                        }// for
+
+
+
+                    }
+
+
+                } catch (Exception e) {
+                    Log.d(tag, "e upload to Server ==>" + e.toString());
+                }
+            }//onClick
+        });
+    }
+
+    private void createAndConnectedDatabase() {
+        manageDatabase = new ManageDatabase(getActivity());
+    }
 
     @Override
     public void onActivityResult(int requestCode,
@@ -153,6 +216,9 @@ public class SignUpFragment extends Fragment {
                 } else {
                     //valid
                     Log.d(tag, "No Space and Picture selected");
+                    //Add value to SQLite
+                    manageDatabase.addNewUserToSQLite(nameString, userString, passwordString, pathPictureString);
+                    Toast.makeText(getActivity(), "Save Value to SQLite OK", Toast.LENGTH_LONG).show();
                 }// end if
 
 
@@ -180,7 +246,6 @@ public class SignUpFragment extends Fragment {
         nameEditText = getView().findViewById(R.id.edtName);
         userEditText = getView().findViewById(R.id.edtUser);
         passwordEditText = getView().findViewById(R.id.edtPassword);
-        uploadImageView = getView().findViewById(R.id.imvUpload);
         pictureImageView = getView().findViewById(R.id.imvPicture);
     }//initiealView
 
