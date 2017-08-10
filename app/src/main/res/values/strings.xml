@@ -2,5 +2,7 @@
     <string name="app_name">Android101</string>
     <string name="user">User :</string>
     <string name="password">Password :</string>
+    <string name="title_have_space">Have Space</string>
+    <string name="message_have_space">Please fill all text</string>
 
 </resources>
