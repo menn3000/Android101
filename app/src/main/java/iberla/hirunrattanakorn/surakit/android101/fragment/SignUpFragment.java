@@ -31,6 +31,8 @@ public class SignUpFragment extends Fragment {
     private String nameString, userString, passwordString, pathPictureString;
     private String tag = "10augV1";
     private Uri uri;
+    private boolean aBoolean = true;
+
 
     @Nullable
     @Override
@@ -74,6 +76,7 @@ public class SignUpFragment extends Fragment {
 
         if (resultCode == getActivity().RESULT_OK) {
             Log.d(tag, "Result_OK");
+            aBoolean = false;
             uri = data.getData();
 
             //Show Image
@@ -83,7 +86,7 @@ public class SignUpFragment extends Fragment {
 
             String[] strings = new String[]{MediaStore.Images.Media.DATA};
             Cursor cursor = getActivity().getContentResolver()
-                    .query(uri,strings,null,null,null);
+                    .query(uri, strings, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
                 int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -142,9 +145,14 @@ public class SignUpFragment extends Fragment {
                     MyAlert myAlert = new MyAlert(getActivity()); //getActivity return context that passed to constructor
                     myAlert.myDialog(getString(R.string.title_have_space),
                             getString(R.string.message_have_space));
+                } else if (aBoolean == true) {
+                    // no picture selected
+                    MyAlert myAlert = new MyAlert(getActivity()); //getActivity return context that passed to constructor
+                    myAlert.myDialog(getString(R.string.title_not_selected),
+                            getString(R.string.not_selected));
                 } else {
                     //valid
-                    Log.d(tag, "No Space");
+                    Log.d(tag, "No Space and Picture selected");
                 }// end if
 
 
